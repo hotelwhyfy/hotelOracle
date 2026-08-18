@@ -50,7 +50,8 @@ says something different every time you look is visibly a random number generato
 
 ## Writing more
 
-Two files hold all the content.
+Two files hold all the content. [WRITING.md](WRITING.md) is the full reference;
+what follows is the summary.
 
 **[vocabulary.ts](src/oracle/corpus/vocabulary.ts)** — tables keyed by an
 astrological fact, each holding interchangeable phrasings. Adding a line to
