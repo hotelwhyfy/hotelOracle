@@ -1,0 +1,209 @@
+:root {
+  --ink: #e8e2d6;
+  --ink-dim: #8a8577;
+  --ink-faint: #5a564d;
+  --ground: #0a0a0c;
+  --gilt: #c9a227;
+  --rule: #23222a;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  /* a faint wash of light off the top of the sky */
+  background-image:
+    radial-gradient(ellipse 80% 55% at 50% -10%, #191a26 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, #12141c 0%, transparent 70%);
+  background-attachment: fixed;
+}
+
+/* a still starfield, laid down once */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 78% 14%, #fff, transparent),
+    radial-gradient(1px 1px at 33% 68%, #d8d8ff, transparent),
+    radial-gradient(1px 1px at 91% 55%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 39%, #fff, transparent),
+    radial-gradient(1px 1px at 8% 81%, #ffe9c4, transparent),
+    radial-gradient(1px 1px at 66% 88%, #fff, transparent),
+    radial-gradient(2px 2px at 24% 47%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 44% 8%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 74%, #cfd6ff, transparent);
+}
+
+#app {
+  position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 10vh, 7rem) 1.5rem 5rem;
+}
+
+/* --- masthead ----------------------------------------------------------- */
+.masthead { text-align: center; margin-bottom: 3.5rem; }
+
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+
+.masthead h1::after {
+  content: '';
+  display: block;
+  width: 4.5rem;
+  height: 1px;
+  margin: 1.4rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--gilt), transparent);
+}
+
+.masthead__time {
+  margin: 1.2rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--ink-faint);
+}
+
+/* --- the reading -------------------------------------------------------- */
+.reading { font-size: clamp(1.2rem, 3.4vw, 1.45rem); line-height: 1.72; }
+
+.line {
+  margin: 0 0 1.9rem;
+  opacity: 0;
+  animation: surface 1.4s ease forwards;
+}
+
+@keyframes surface {
+  from { opacity: 0; transform: translateY(0.6rem); filter: blur(3px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line { animation: none; opacity: 1; }
+}
+
+.line--invocation {
+  font-style: italic;
+  color: var(--ink-dim);
+  font-size: 0.94em;
+}
+
+.line--charge {
+  margin-top: 2.6rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid var(--rule);
+  color: var(--gilt);
+  font-style: italic;
+}
+
+.line--counsel { font-weight: 500; }
+
+/* --- footer ------------------------------------------------------------- */
+.footer { margin-top: 4rem; text-align: center; }
+
+.attune {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.attune:hover { color: var(--gilt); border-color: var(--gilt); }
+
+.footer__note {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* --- the sky behind this ------------------------------------------------ */
+.behind { margin-top: 3rem; text-align: left; }
+
+.behind summary {
+  cursor: pointer;
+  list-style: none;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0.5rem;
+}
+
+.behind summary::-webkit-details-marker { display: none; }
+.behind summary:hover { color: var(--ink-dim); }
+.behind[open] summary { margin-bottom: 1.5rem; }
+
+.sky { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); }
+
+.sky__moon { margin: 0 0 1.4rem; text-align: center; letter-spacing: 0.1em; }
+.sky__moonGlyph { color: var(--gilt); font-size: 1rem; }
+
+.bodies { display: grid; gap: 0.35rem; }
+
+.body {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr auto;
+  gap: 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #16161c;
+}
+
+.body__planet { color: var(--ink); }
+.body__flags { color: var(--gilt); }
+
+.sky__ground {
+  margin: 1.4rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+.aspects { margin-top: 1.4rem; display: grid; gap: 0.3rem; color: var(--ink-faint); }
+.aspect { white-space: nowrap; overflow-x: auto; }
+
+/* --- first paint, while a permission dialog is on screen ----------------- */
+.casting {
+  margin: 4rem 0 0;
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-faint);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .casting { animation: none; opacity: 0.6; }
+}
