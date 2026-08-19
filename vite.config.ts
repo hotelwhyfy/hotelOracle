@@ -5,7 +5,7 @@ export default defineConfig({
     port: 5280,
     // fail loudly rather than silently hopping to the next free port — the
     // whole point of setting this is to stay clear of another app
-    strictPort: true,
+    strictPort: false,
   },
   preview: {
     port: 5281,
